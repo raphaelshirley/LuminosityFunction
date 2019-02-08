@@ -148,7 +148,9 @@ def plot_LF(z1,z2,Lmin,Lmax,table,
             #print(np.sum(np.minimum(z_max_bin, z2) != z2)/len(z_max_bin))
         
             binwidth = galaxy_bins['L_centre_values'][gal_bin+1] - galaxy_bins['L_centre_values'][gal_bin]
-            dN_by_dL= dN_by_dL / (np.log10(binwidth/Lsun))
+            log_binwidth = (np.log10(galaxy_bins['L_centre_values'][gal_bin+1]/Lsun) 
+                            - np.log10(galaxy_bins['L_centre_values'][gal_bin]/Lsun))
+            dN_by_dL= dN_by_dL / (log_binwidth)
         
             galaxy_bins['dN_by_dL'][gal_bin] = dN_by_dL
             n +=1       
@@ -178,7 +180,9 @@ def plot_LF(z1,z2,Lmin,Lmax,table,
             dN_by_dL = dN_by_dL /( volume(z1,z2,cosmo, moc) / (( u.megaparsec)**3 ))
             #print(dN_by_dL)
             binwidth = galaxy_bins['L_centre_values'][gal_bin+1] - galaxy_bins['L_centre_values'][gal_bin]
-            dN_by_dL= dN_by_dL / (np.log10(binwidth/Lsun))
+            log_binwidth = (np.log10(galaxy_bins['L_centre_values'][gal_bin+1]/Lsun) 
+                            - np.log10(galaxy_bins['L_centre_values'][gal_bin]/Lsun))
+            dN_by_dL= dN_by_dL / (log_binwidth)
         
             galaxy_bins['dN_by_dL'][gal_bin] = dN_by_dL
             n +=1
