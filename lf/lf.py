@@ -1,4 +1,4 @@
-%matplotlib inline
+#%matplotlib inline
 #%config InlineBackend.figure_format = 'svg'
 
 import matplotlib.pyplot as plt
@@ -35,6 +35,7 @@ from astropy.io.votable import parse_single_table
 from pcigale.sed import SED
 from pcigale.sed_modules import get_module
 
+DMU_DIR = '/Users/rs548/GitHub/dmu_products/'
 
 cosmo = FlatLambdaCDM(H0=100. , Om0 = (1-0.7))
 #cosmo = Planck15
@@ -217,8 +218,8 @@ def plot_LF(z1,z2,Lmin,Lmax,table,
     
 #plot_LF(0.8,1.,10**8.75 * Lsun, 10**14.25 * Lsun,catalogue, bin_width=0.5, 
 #        show_sample=True, show_LF=True, vmax=True)
-plot_LF(0.8,1.,10**8.75 * Lsun, 10**14.25 * Lsun,catalogue, bin_width=0.5, 
-        show_sample=True, show_LF=True, vmax=False)
+#plot_LF(0.8,1.,10**8.75 * Lsun, 10**14.25 * Lsun,catalogue, bin_width=0.5, 
+#        show_sample=True, show_LF=True, vmax=False)
 #plt.show()
 
 
