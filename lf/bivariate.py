@@ -57,12 +57,20 @@ def volume(z1,z2,cosmo, moc =en1_moc):
 
 #print(volume(0.,1.,cosmo))
 
-def plot_LF(z1,z2,Lmin,Lmax,table, 
-            cosmo=cosmo, bin_width=None, l_col='cigale_dustlumin', 
-            show_sample=False, show_LF = False,
-            vmax=False, eff_area=False,
-            moc =en1_moc):
-    """Plot a the luminosity function and return a table of the bin values
+def bivariate(table,
+              z1, z2,
+              d1_min, d1_max, d1_bin_width, d1_name='cigale_dustlumin',
+              d2_min, d2_max, d2_bin_width, d2_name='cigale_mstar', 
+              cosmo=cosmo, 
+              show_sample=False, 
+              show_LF = False,
+              vmax=False, 
+              eff_area=False,
+              moc = en1_moc):
+    """Plot a general two dimansional function
+    
+    Take a catalogue as input with two columns and plot a 2d distribution with 
+    volume weighting
     
     Inputs
     ------
@@ -72,26 +80,37 @@ def plot_LF(z1,z2,Lmin,Lmax,table,
     Outputs
     ------
     """
-    x = table['redshift']
-    y = table[l_col]
+    z = table['redshift']
+    d1 = table[d1_name]
+    d2 = table[d2_name]
     
     
-    #mask_z01 = y < Lmin
-    #mask_z01 |= x > z2
-    #mask_z01 |= x < z1
-    mask_z01 = (  (x > z1) 
+
+    #Make redshift bin mask
+    mask_z = (  (x > z1) 
                 & (x < z2))
 
 
-
-    y = y[mask_z01]
-    x = x[mask_z01]
+    #Apply redshift mask to redshifts and both columns
+    z = z[mask_z]
+    d1 = d1[mask_z]
+    d2 = d2[mask_z]
+    
+    try:
+        d1_unit = d1.unit
+    except:
+        d1_unit = 'Unknown unit'
+        
+    try:
+        d2_unit = d2.unit
+    except:
+        d2_unit = 'Unknown unit'
 
 
     if show_sample:
-        plt.scatter(x,np.log10(y/Lsun), s = 10)
+        plt.scatter(z,np.log10(d1), s = 10)
         plt.xlabel('redshift z')
-        plt.ylabel('$log_{10}$ Luminosity ($L/L_{\odot}$)')
+        plt.ylabel('$log_{10}$ Dimension 1 ($L/L_{\odot}$)')
         plt.show()
 
     nbins = 20 
