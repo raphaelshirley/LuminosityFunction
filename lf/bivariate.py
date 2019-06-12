@@ -59,8 +59,8 @@ def volume(z1,z2,cosmo, moc =en1_moc):
 
 def bivariate(table,
               z1, z2,
-              d1_min, d1_max, d1_bin_width, d1_name='cigale_dustlumin',
-              d2_min, d2_max, d2_bin_width, d2_name='cigale_mstar', 
+              d1_min, d1_max, d1_bin_width, d1_name=,
+              d2_min, d2_max, d2_bin_width, d2_name,
               cosmo=cosmo, 
               show_sample=False, 
               show_LF = False,
